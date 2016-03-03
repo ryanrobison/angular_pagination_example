@@ -4,7 +4,7 @@ coursesApp.factory('enroll', ['$http', function($http) {
 
     enrollStudent: function(courseURL, token) {
       
-      var parameter = JSON.stringify({
+      var parameters = JSON.stringify({
         access_token: token,
         type: "student",
         user: {name: "Test User"}
@@ -13,7 +13,7 @@ coursesApp.factory('enroll', ['$http', function($http) {
       return $http({
         method: 'POST',
         url: courseURL,
-        params: parameter
+        params: parameters
       });
 
     }
