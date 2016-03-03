@@ -1,5 +1,5 @@
 coursesApp.controller('CoursesController',
-	function CoursesController($scope, authToken, coursesData) {
+	function CoursesController($scope, authToken, courseData, enroll) {
 
     $scope.pageURL = 'http://canvas-api.herokuapp.com/api/v1/courses';
 
@@ -15,7 +15,7 @@ coursesApp.controller('CoursesController',
         })
         .then(function(response) {
 
-          coursesData.getCourses($scope.pageURL, $scope.token)
+          courseData.getCourses($scope.pageURL, $scope.token)
             .success(function(data, status, headers, config) {
 
               if ( headers('Link') !== null ) {
@@ -23,8 +23,8 @@ coursesApp.controller('CoursesController',
               }
 
               if ( angular.isArray(data) ) {
+                $scope.course = false
                 $scope.courses = data;
-                
               } else {
                 $scope.courses = false;
                 $scope.course = data
@@ -41,25 +41,45 @@ coursesApp.controller('CoursesController',
       
     }
 
-      parseLinks = function(links) {
+    parseLinks = function(links) {
 
-        $scope.pagination = {};
+      $scope.pagination = {};
+      
+      angular.forEach(links, function (l) {
         
-        angular.forEach(links, function (l) {
-          
-          var linkParts = l.split(';'),
-            rel = linkParts[1].replace(/rel="(.*)"/, '$1').trim(),
-            url = linkParts[0].replace(/<(.*)>/, '$1').trim();
+        var linkParts = l.split(';'),
+          rel = linkParts[1].replace(/rel="(.*)"/, '$1').trim(),
+          url = linkParts[0].replace(/<(.*)>/, '$1').trim();
 
-          if ( rel == 'prev' || rel == 'next' ) {
-            $scope.pagination[rel] = url;
-          }
+        if ( rel == 'prev' || rel == 'next' ) {
+          $scope.pagination[rel] = url;
+        }
 
-        });
+      });
 
-      }
+    }
 
+    updatePrevURL = function(currentURL) {
+      $scope.prevURL = currentURL;
+    }
+
+    $scope.viewCourse = function(id) {
+      updatePrevURL($scope.pageURL);
+      $scope.pageURL = 'http://canvas-api.herokuapp.com/api/v1/courses/' + id
+      getCourseData(); 
+    }
+
+    $scope.updateCoursesPage = function(url) {
+      updatePrevURL($scope.pageURL);
+      $scope.pageURL = url;
       getCourseData();
+    }
+
+    $scope.enroll = function() {
+      enroll.enrollStudent($scope.pageURL, $scope.token);
+    }
+
+    getCourseData();
 
 	}
 );

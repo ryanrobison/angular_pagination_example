@@ -14,20 +14,45 @@
             <h1>Available Courses</h1>
           </div>
           <div class="container">
-            <ul ng-repeat="course in courses">
+            <ul class="course" ng-repeat="course in courses">
               <li>
                 <h3>
-                  {{course.name}}
-                  <div>{{course.code}}</div>
+                  <a href ng-click="viewCourse(course.id);">
+                    {{course.name}}
+                  </a>
+                  <div>
+                    {{course.code}}
+                  </div>
                 </h3>
                 <p>
                   {{course.description}}
                 </p>
               </li>
             </ul>
-            <div id="pagination" ng-repeat="(rel, link) in pagination">
-              <a href ng-click="updateCoursesPage(link)">{{rel}}</a>
+            <div class="pagination">
+              <a href ng-click="updateCoursesPage(link)" ng-repeat="(rel, link) in pagination">{{rel}}</a>
             </div>
+          </div>
+        </div>
+        <div class="container" ng-show="course" ng-cloak>
+          <ul class="course">
+            <li>
+              <h3>
+                <a href ng-click="viewCourse(course.id);">
+                  {{course.name}}
+                </a>
+                <div>
+                  {{course.code}}
+                </div>
+              </h3>
+              <p>
+                {{course.description}}
+              </p>
+              <a href ng-click="enroll()">Enroll</a>
+            </li>
+          </ul>
+          <div class="pagination">
+            <a href ng-click="updateCoursesPage(prevURL)">Back</a>
           </div>
         </div>
       </div>
@@ -36,7 +61,8 @@
       <script src="./lib/angular.min.js"></script>
       <script src="./js/app.js"></script>
       <script src="./js/services/AuthToken.js"></script>
-      <script src="./js/services/CoursesData.js"></script>
+      <script src="./js/services/CourseData.js"></script>
+      <script src="./js/services/Enroll.js"></script>
       <script src="./js/controllers/CoursesController.js"></script>
     </body>
 </html>

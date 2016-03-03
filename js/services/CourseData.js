@@ -1,4 +1,4 @@
-coursesApp.factory('coursesData', ['$http', function($http) {
+coursesApp.factory('courseData', ['$http', function($http) {
 
   return {
 
