@@ -1,0 +1,58 @@
+body {
+  font-family: "proxima nova light",arial,sans-serif;
+  color: #6E6E6E;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  padding: 0 10px;
+}
+#courses-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#courses-list ul li {
+  padding: 0;
+  margin: 0;
+}
+#title-container {
+  box-shadow: inset 0 0 4px -2px rgba(0,0,0,.45),0 0 20px rgba(0,0,0,.45);
+}
+#title-container h1 {
+  padding: 10px 0;
+  margin: 0 10px;
+  font-weight: 500;
+}
+#courses-list h3 {
+  color: #54c9e8;
+  font-size: 21px;
+  font-weight: 100;
+}
+#courses-list h3 div {
+  font-size: 15px; 
+}
+#courses-list p {
+  font-size: 13px;
+  line-height: 1.25;
+}
+#pagination {
+  padding-top: 20px;
+  border-top: 1px solid #e2e2e2;
+}
+#pagination a {
+  color: #fff;
+  display: inline-block;
+  text-decoration: none;
+  padding: 3px 8px;
+  background: #e63c2e;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+#pagination a:hover {
+  background: #d5382b;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

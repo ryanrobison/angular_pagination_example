@@ -8,19 +8,27 @@
   </head>
     <body>
 
-      <div ng-controller="CoursesController">
-        <div id="courses-list">
-          <ul ng-repeat="course in courses">
-            <li>
-              <h3>
-                {{course.name}}
-                <div>{{course.code}}</div>
-              </h3>
-              <p>
-                {{course.description}}
-              </p>
-            </li>
-          </ul>
+      <div ng-controller="CoursesController" ng-cloak>
+        <div id="courses-list" ng-show="courses">
+          <div id="title-container">
+            <h1>Available Courses</h1>
+          </div>
+          <div class="container">
+            <ul ng-repeat="course in courses">
+              <li>
+                <h3>
+                  {{course.name}}
+                  <div>{{course.code}}</div>
+                </h3>
+                <p>
+                  {{course.description}}
+                </p>
+              </li>
+            </ul>
+            <div id="pagination" ng-repeat="(rel, link) in pagination">
+              <a href ng-click="updateCoursesPage(link)">{{rel}}</a>
+            </div>
+          </div>
         </div>
       </div>
 
